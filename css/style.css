@@ -11,6 +11,19 @@ html {
   font-family: sans-serif;
 }
 
+.header {
+  display: flex;
+  align-items: center;
+  font-size: 4em;
+  color: #ffc600;
+}
+
+.headerPosition {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .keys {
   display: flex;
   flex: 1;
@@ -55,7 +68,6 @@ kbd {
 
 /* Slideshow container */
 .slideshow-container {
-  position: relative;
   margin: auto;
 }
 
@@ -69,8 +81,6 @@ kbd {
   cursor: pointer;
   position: absolute;
   top: 50%;
-  width: auto;
-  margin-top: -22px;
   padding: 16px;
   color: white;
   background-color: #ffc600;
