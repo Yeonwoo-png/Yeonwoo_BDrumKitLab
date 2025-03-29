@@ -58,30 +58,92 @@
   <audio data-key="75" src="sounds/tom.wav"></audio>
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
-<script>
-  function playSound(e)
-  {
-    const audio = document.querySelector(`audio[data-key = "${e.keyCode}"]`)
-    const key = document.querySelector(`.key[data-key = "${e.keyCode}"]`)
+  <div class="slideshow-container">
 
-    if (!audio) return; //stops function from running if true
+    <!-- Full-width images with number and caption text -->
+    <div class="mySlides fade">
+      <div class="numbertext">1 / 2</div>
+      <div class="text">Caption Text</div>
+    </div>
+  
+    <div class="mySlides fade">
+      <div class="numbertext">2 / 2</div>
+      <div class="text">Caption Two</div>
+    </div>
+  
+    <!-- Next and previous buttons -->
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+  </div>
+  <br>
+  
+  <!-- The dots/circles -->
+  <div style="text-align:center">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+  </div>
 
-    audio.currentTime = 0 //rewinds audio back to the beginning whenever it's pressed
-    audio.play();
+  <script>
 
-    key.classList.add("playing");
-  }
+    let slideIndex = 1;
+    showSlides(slideIndex);
 
-  function removeTransition(e) 
-  {
-    if (e.propertyName !== "transform") return; //skip if it's not a transform
-    this.classList.remove("playing");
-  }
+    // Next/previous controls
+    function plusSlides(n) 
+    {
+    showSlides(slideIndex += n);
+    }
 
-  const keys = document.querySelectorAll(".key");
-  keys.forEach(key => key.addEventListener("transitionend", removeTransition));
+    // Thumbnail image controls
+    function currentSlide(n) 
+    {
+      showSlides(slideIndex = n);
+    }
 
-  window.addEventListener("keydown", playSound);
+    function showSlides(n) 
+    {
+      let i;
+      let slides = document.getElementsByClassName("mySlides");
+      let dots = document.getElementsByClassName("dot");
+      if (n > slides.length) {slideIndex = 1}
+      if (n < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) 
+      {
+      slides[i].style.display = "none";
+      }
+      for (i = 0; i < dots.length; i++) 
+      {
+      dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex-1].style.display = "block";
+      dots[slideIndex-1].className += " active";
+      }
+  </script>
+
+  <script>
+    function playSound(e)
+    {
+      const audio = document.querySelector(`audio[data-key = "${e.keyCode}"]`)
+      const key = document.querySelector(`.key[data-key = "${e.keyCode}"]`)
+      
+      if (!audio) return; //stops function from running if true
+      
+      audio.currentTime = 0 //rewinds audio back to the beginning whenever it's pressed
+      audio.play();
+      
+      key.classList.add("playing");
+    }
+      
+    function removeTransition(e) 
+    {
+      if (e.propertyName !== "transform") return; //skip if it's not a transform
+      this.classList.remove("playing");
+    }
+      
+    const keys = document.querySelectorAll(".key");
+    keys.forEach(key => key.addEventListener("transitionend", removeTransition));
+      
+    window.addEventListener("keydown", playSound);
 </script>
 
 
